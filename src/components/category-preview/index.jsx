@@ -1,6 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { ProductCard } from "../product-card";
-import { CategoryPreviewContainer, PreviewContainer, Title } from "./category-preview.styles";
+import {
+    CategoryPreviewContainer,
+    PreviewContainer,
+    Title,
+} from "./category-preview.styles";
 
 export const CategoryPreview = ({ title, products }) => {
     const navigate = useNavigate();

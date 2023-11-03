@@ -18,14 +18,7 @@ const getButton = (buttonType = BUTTON_TYPES.base) =>
     }[buttonType]);
 
 export const Button = ({ children, buttonType, ...otherProps }) => {
-    const CustomButton = getButton(buttonType)
-    // let className = "button-container";
-    // if (buttonType) {
-    //     className += ` ${BUTTON_TYPES[buttonType]}`;
-    // }
-    return (
-        <CustomButton {...otherProps}>
-            {children}
-        </CustomButton>
-    );
+    const CustomButton = getButton(buttonType);
+
+    return <CustomButton {...otherProps}>{children}</CustomButton>;
 };

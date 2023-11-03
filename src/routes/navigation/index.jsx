@@ -1,7 +1,4 @@
-import { useContext } from "react";
 import { Outlet } from "react-router-dom";
-import { UserContext } from "../../contexts/user.context";
-import { CartContext } from "../../contexts/cart.context";
 import { ReactComponent as StarLogo } from "../../assets/crown.svg";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 import { CartIcon } from "../../components/cart-icon";
@@ -12,10 +9,13 @@ import {
     NavLinksContainer,
     NavigationContainer,
 } from "./navigation.styles";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user.selector";
+import { selectCartIsOpen } from "../../store/cart/cart.selector";
 
 export const Navigation = () => {
-    const { currentUser } = useContext(UserContext);
-    const { cartIsOpen } = useContext(CartContext);
+    const currentUser = useSelector(selectCurrentUser);
+    const cartIsOpen = useSelector(selectCartIsOpen);
 
     return (
         <>
@@ -24,20 +24,13 @@ export const Navigation = () => {
                     <StarLogo className="logo" />
                 </LogoContainer>
                 <NavLinksContainer>
-                    <NavLinks to="/shop">
-                        SHOP
-                    </NavLinks>
+                    <NavLinks to="/shop">SHOP</NavLinks>
                     {currentUser ? (
-                        <NavLinks
-                            as="span"
-                            onClick={signOutUser}
-                        >
+                        <NavLinks as="span" onClick={signOutUser}>
                             SIGN OUT
                         </NavLinks>
                     ) : (
-                        <NavLinks to="/auth">
-                            SIGN IN
-                        </NavLinks>
+                        <NavLinks to="/auth">SIGN IN</NavLinks>
                     )}
                     <CartIcon />
                 </NavLinksContainer>
