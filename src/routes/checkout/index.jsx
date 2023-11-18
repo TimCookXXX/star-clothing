@@ -2,6 +2,7 @@ import { CheckoutItem } from "../../components/checkout-item";
 import {
     CheckoutContainer,
     CheckoutHeader,
+    SignInInfo,
     TotalBlock,
 } from "./checkout.styles";
 import { useSelector } from "react-redux";
@@ -9,10 +10,13 @@ import {
     selectCartItems,
     selectCartTotal,
 } from "../../store/cart/cart.selector";
+import { PaymentForm } from "../../components/payment-form";
+import { selectCurrentUser } from "../../store/user/user.selector";
 
 export const Checkout = () => {
     const cartItems = useSelector(selectCartItems);
     const cartTotal = useSelector(selectCartTotal);
+    const currentUser = useSelector(selectCurrentUser);
 
     return (
         <CheckoutContainer>
@@ -37,6 +41,11 @@ export const Checkout = () => {
                 <CheckoutItem key={cartItem.id} cartItem={cartItem} />
             ))}
             <TotalBlock>Total: {cartTotal}$</TotalBlock>
+            {currentUser ? (
+                <PaymentForm />
+            ) : (
+                <SignInInfo to={`/auth`}>Sign In to pay for goods</SignInInfo>
+            )}
         </CheckoutContainer>
     );
 };

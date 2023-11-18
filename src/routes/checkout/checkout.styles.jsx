@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const CheckoutContainer = styled.div`
     width: 55%;
@@ -22,3 +23,7 @@ export const TotalBlock = styled.span`
     margin-left: auto;
     font-size: 36px;
 `;
+
+export const SignInInfo = styled(Link)`
+    font-size: 20px;
+`
